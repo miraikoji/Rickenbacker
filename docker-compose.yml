@@ -1,0 +1,69 @@
+version: '3.9'
+
+services:
+
+  frontend:
+    build:
+      context: .
+      dockerfile: ./frontend/Dockerfile
+    container_name: svelte_container
+    ports:
+      - 5173:5173
+    tty: true
+    stdin_open: true
+    environment:
+      NODE_ENV: development
+    volumes:
+      - ./frontend:/app
+    command: sh -c "cd /app/svelte-app && npm install && npm run dev -- --host"
+
+  backend:
+    build:
+      context: .
+      dockerfile: ./backend/Dockerfile
+    container_name: go_container
+    ports:
+      - 9090:9090
+    tty: true
+    stdin_open: true
+    environment:
+      TZ: 'Asia/Tokyo'
+    volumes:
+      - ./backend:/app
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+    volumes:
+      - ./phpmyadmin/phpmyadmin-misc.ini:/usr/local/etc/php/conf.d/phpmyadmin-misc.ini
+    environment:
+      PMA_ARBITRARY: 1
+      PMA_HOSTS: mysql_container
+      PMA_USER: root
+      PMA_PASSWORD: root
+      PMA_PORT: 3306
+    ports:
+      - 8888:80
+
+  db:
+    image: mysql:latest
+    container_name: mysql_container
+    ports:
+      - 3306:3306
+    expose:
+      - 3306
+    environment:
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_DATABASE: rickenbacker
+      TZ: 'Asia/Tokyo'
+      MYSQL_ROOT_HOST: '%'
+      MYSQL_USER: iamapen
+      MYSQL_PASSWORD: password
+      MYSQL_TCP_PORT: 3306
+    volumes:
+      - ./mysql/initdb.d:/docker-entrypoint-initdb.d
+      - ./mysql/conf.d:/etc/mysql/conf.d
+      - ./mysql/mysql_data:/var/lib/mysql
+    links:
+      - backend
+      - phpmyadmin
+    command: mysqld --character-set-server=utf8mb4
