@@ -23,7 +23,7 @@ type LoginRequest struct {
 // 動作確認用のデータ
 // 実際のアプリケーションでは、データベースを使う
 var users = map[string]string{
-	"t4traw": "$2a$10$5VotD2mOBoRj2At0wG7bw.qSZgylGZydJoEP38fqQyiRphsqf8NLa",
+	"sample": "$2a$10$5VotD2mOBoRj2At0wG7bw.qSZgylGZydJoEP38fqQyiRphsqf8NLa",
 }
 
 func main() {
