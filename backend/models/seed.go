@@ -4,13 +4,14 @@ import (
 	"log"
 
 	"github.com/go-faker/faker/v4"
+	"golang.org/x/crypto/bcrypt"
 	"gorm.io/gorm"
 )
 
 func Seed(db *gorm.DB) {
 	seedUser := User{
 		Email:    "mirai@example.com",
-		Password: "$2a$10$5VotD2mOBoRj2At0wG7bw.qSZgylGZydJoEP38fqQyiRphsqf8NLa",
+		Password: hashed("password"),
 		Name:     "sample",
 	}
 	db.FirstOrCreate(&seedUser)
@@ -25,4 +26,13 @@ func Seed(db *gorm.DB) {
 		db.FirstOrCreate(&post)
 		log.Printf("[Seed] Create Post: %s", post.Title)
 	}
+}
+
+func hashed(password string) string {
+	hashedPassword, err := bcrypt.GenerateFromPassword([]byte(password), bcrypt.DefaultCost)
+	if err != nil {
+		log.Fatal(err)
+	}
+
+	return string(hashedPassword)
 }
