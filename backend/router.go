@@ -18,6 +18,9 @@ func Router(e *echo.Echo, db *gorm.DB) {
 	e.POST("/login", sessionController.LoginHandler)
 	e.GET("/secret_page", sessionController.SecretsPageHandler, checkLoginMiddleware)
 
+	postController := &contollers.PostsController{DB: db}
+	e.GET("/posts", postController.GetAllPosts)
+
 	// userController := &contollers.UserController{DB: db}
 }
 
