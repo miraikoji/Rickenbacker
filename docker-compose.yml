@@ -28,6 +28,7 @@ services:
     stdin_open: true
     environment:
       TZ: 'Asia/Tokyo'
+      SEED_DATA: true
     volumes:
       - ./backend:/app
 
