@@ -1,16 +1,6 @@
 <script lang="ts">
 	import { onMount } from 'svelte';
 
-	type Post = {
-		ID: number;
-		CreatedAt: string;
-		UpdatedAt: string;
-		DeletedAt: string | null;
-		Title: string;
-		Body: string;
-		UserID: number;
-	};
-
 	let posts: Post[] = [];
 
 	const fetchPosts = async () => {

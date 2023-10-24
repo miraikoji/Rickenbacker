@@ -9,4 +9,12 @@ declare global {
 	}
 }
 
-export {};
+declare type Post = {
+	ID: number;
+	CreatedAt: string;
+	UpdatedAt: string;
+	DeletedAt: string | null;
+	Title: string;
+	Body: string;
+	UserID: number;
+};
