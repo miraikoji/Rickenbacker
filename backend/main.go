@@ -5,6 +5,7 @@ import (
 	"net/http"
 	"os"
 	"rickenbacker/models"
+	"time"
 
 	"github.com/gorilla/sessions"
 	"github.com/labstack/echo-contrib/session"
@@ -16,11 +17,22 @@ import (
 )
 
 func main() {
-	dsn := "iamapen:password@tcp(db:3306)/rickenbacker?charset=utf8mb4&parseTime=True&loc=Local"
-	db, err := gorm.Open(mysql.Open(dsn), &gorm.Config{})
-	if err != nil {
-		fmt.Println("データベースへの接続に失敗しました！", err)
-		return
+	maxRetry := 5
+	retryInterval := time.Second * 5
+	var db *gorm.DB
+	var err error
+
+	for i := 0; i < maxRetry; i++ {
+		dsn := "iamapen:password@tcp(db:3306)/rickenbacker?charset=utf8mb4&parseTime=True&loc=Local"
+		db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
+
+		if err == nil {
+			fmt.Println("データベースに接続しました。")
+			break
+		}
+
+		fmt.Println("データベースへの接続に失敗しました。リトライします…", err)
+		time.Sleep(retryInterval)
 	}
 
 	models.Migrate(db)
