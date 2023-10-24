@@ -20,6 +20,7 @@ func Router(e *echo.Echo, db *gorm.DB) {
 
 	postController := &contollers.PostsController{DB: db}
 	e.GET("/posts", postController.GetAllPosts)
+	e.GET("/posts/:id", postController.GetPost)
 
 	// userController := &contollers.UserController{DB: db}
 }

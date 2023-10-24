@@ -21,3 +21,13 @@ func (con *PostsController) GetAllPosts(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, posts)
 }
+
+func (con *PostsController) GetPost(c echo.Context) error {
+	var post models.Post
+
+	if result := con.DB.Find(&post, c.Param("id")); result.Error != nil {
+		return c.JSON(http.StatusInternalServerError, "error")
+	}
+
+	return c.JSON(http.StatusOK, post)
+}
