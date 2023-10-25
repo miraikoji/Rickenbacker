@@ -20,7 +20,7 @@ export async function load({ params, fetch }) {
 		if (response !== null) {
 			return {
 				title: response.Title,
-				content: response.Body // ここもBodyに修正しました
+				content: response.Body
 			};
 		} else {
 			throw error(404, 'Post not found');
