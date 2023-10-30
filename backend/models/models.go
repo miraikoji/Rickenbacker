@@ -1,14 +1,25 @@
 package models
 
-import "gorm.io/gorm"
+import (
+	"time"
+
+	"gorm.io/gorm"
+)
 
 func Migrate(db *gorm.DB) {
 	db.AutoMigrate(&User{})
 	db.AutoMigrate(&Post{})
 }
 
+type BaseModel struct {
+	ID        uint      `param:"id"`
+	CreatedAt time.Time `gorm:"<-create"`
+	UpdatedAt time.Time
+	DeletedAt time.Time `gorm:"<-delete"`
+}
+
 type User struct {
-	gorm.Model
+	BaseModel
 	Email    string
 	Password string
 	Name     string
@@ -16,7 +27,7 @@ type User struct {
 }
 
 type Post struct {
-	gorm.Model
+	BaseModel
 	Title  string
 	Body   string
 	UserID uint
