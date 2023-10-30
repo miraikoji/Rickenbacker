@@ -1,10 +1,45 @@
 <script>
 	import '../app.css';
-	import Header from '../components/Header.svelte';
+	import Header from '@/components/Header.svelte';
+	import Breadcrumb from '@/components/Breadcrumb.svelte';
+	import SideHeader from '@/components/SideHeader.svelte';
+	import Badge from '@/components/Badge.svelte';
 </script>
 
 <Header />
 
 <div class="mx-auto max-w-7xl p-6 lg:px-8">
-	<slot />
+	<Breadcrumb />
+	<div class="grid grid-cols-12 grid-rows-2 gap-12">
+		<div class="col-span-9">
+			<slot />
+		</div>
+		<aside class="col-span-3 my-24">
+			<div class="mb-6">
+				<SideHeader title="カテゴリー" />
+				<ul role="list" class="marker:text-red-500 list-disc pl-5 my-2 space-y-1 text-slate-600">
+					<li>エンジニア日報</li>
+					<li>技術備忘録</li>
+					<li>ポッドキャスト</li>
+				</ul>
+			</div>
+			<div class="mb-6">
+				<SideHeader title="タグ" />
+				<div class="my-2">
+					<Badge name="GitHub" />
+					<Badge name="GitHub Actions" />
+					<Badge name="Fargate" />
+					<Badge name="Fargate Spot" />
+					<Badge name="Terraform" />
+					<Badge name="ECS" />
+					<Badge name="AWS" />
+					<Badge name="Go" />
+					<Badge name="Echo" />
+					<Badge name="Ruby" />
+					<Badge name="Ruby on Rails" />
+					<Badge name="RSpec" />
+				</div>
+			</div>
+		</aside>
+	</div>
 </div>
