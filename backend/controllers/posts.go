@@ -31,3 +31,25 @@ func (con *PostsController) GetPost(c echo.Context) error {
 
 	return c.JSON(http.StatusOK, post)
 }
+
+func (con *PostsController) CreatePost(c echo.Context) error {
+	var post models.Post
+
+	if err := c.Bind(&post); err != nil {
+		return c.JSON(http.StatusBadRequest, "Bad Request")
+	}
+
+	con.DB.Create(&post)
+	return c.JSON(http.StatusCreated, post)
+}
+
+func (con *PostsController) UpdatePost(c echo.Context) error {
+	var post models.Post
+
+	if err := c.Bind(&post); err = nil {
+		return c.JSON(http.StatusBadRequest, "Bad Request")
+	}
+
+	con.DB.Save(&post)
+	return c.JSON(http.StatusOK, post)
+}
