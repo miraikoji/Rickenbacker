@@ -25,8 +25,8 @@ func (con *PostsController) GetAllPosts(c echo.Context) error {
 func (con *PostsController) GetPost(c echo.Context) error {
 	var post models.Post
 
-	if result := con.DB.Find(&post, c.Param("id")); result.Error != nil {
-		return c.JSON(http.StatusInternalServerError, "error")
+	if result := con.DB.Take(&post, c.Param("id")); result.Error != nil {
+		return c.JSON(http.StatusNotFound, "Post Not Found")
 	}
 
 	return c.JSON(http.StatusOK, post)

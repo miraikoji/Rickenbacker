@@ -28,7 +28,7 @@ type User struct {
 
 type Post struct {
 	BaseModel
-	Title  string
-	Body   string
-	UserID uint
+	Title  string `form:"title"`
+	Body   string `form:"body"`
+	UserID uint   `form:"user_id"`
 }
