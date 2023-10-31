@@ -10,12 +10,12 @@
 		<div class="ml-3">
 			<p class="text-sm font-medium text-gray-700 group-hover:text-gray-900">Tatsuro Moriyama</p>
 			<p class="text-xs font-medium text-gray-500 group-hover:text-gray-700">
-				フロントエンド チームリーダー
+				あいうえおかきくけこさしすせそ
 			</p>
 		</div>
 	</div>
 	<div class="">
-		<p class="text-sm">2023-10-30 15:04:05</p>
+		<p class="text-sm">2006-01-02 15:04:05</p>
 	</div>
 	<div>
 		<p class="text-sm">エンジニア日報</p>
