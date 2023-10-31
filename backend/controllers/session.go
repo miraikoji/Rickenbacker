@@ -2,6 +2,7 @@ package controllers
 
 import (
 	"errors"
+	"fmt"
 	"net/http"
 	"rickenbacker/models"
 
@@ -53,6 +54,32 @@ func (sh *SessionController) LoginHandler(c echo.Context) error {
 	return c.String(http.StatusOK, "Logged in!")
 }
 
+func (sh *SessionController) CurrentUser(c echo.Context) (*models.User, error) {
+	sess, err := session.Get("session", c)
+	if err != nil {
+		return nil, err
+	}
+
+	userID, ok := sess.Values["user_id"].(uint)
+	if !ok {
+		return nil, errors.New("user not logged in")
+	}
+
+	var user models.User
+	result := sh.DB.First(&user, userID)
+	if result.Error != nil {
+		return nil, result.Error
+	}
+
+	return &user, nil
+}
+
 func (sh *SessionController) SecretsPageHandler(c echo.Context) error {
-	return c.String(http.StatusOK, "secret page")
+	user, err := sh.CurrentUser(c)
+	if err != nil {
+		return err
+	}
+
+	message := fmt.Sprintf("login user is: %v", user.Name)
+	return c.String(http.StatusOK, message)
 }
