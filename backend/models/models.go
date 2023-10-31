@@ -13,9 +13,9 @@ func Migrate(db *gorm.DB) {
 
 type BaseModel struct {
 	ID        uint      `param:"id"`
-	CreatedAt time.Time `gorm:"<-create"`
+	CreatedAt time.Time `gorm:"<-:create"`
 	UpdatedAt time.Time
-	DeletedAt time.Time `gorm:"<-delete"`
+	DeletedAt gorm.DeletedAt
 }
 
 type User struct {

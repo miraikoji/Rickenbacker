@@ -36,20 +36,24 @@ func (con *PostsController) CreatePost(c echo.Context) error {
 	var post models.Post
 
 	if err := c.Bind(&post); err != nil {
-		return c.JSON(http.StatusBadRequest, "Bad Request")
+		return c.JSON(http.StatusInternalServerError, nil)
 	}
 
-	con.DB.Create(&post)
+	if result := con.DB.Create(&post); result.Error != nil {
+		return c.JSON(http.StatusInternalServerError, "Couldn't create post")
+	}
 	return c.JSON(http.StatusCreated, post)
 }
 
 func (con *PostsController) UpdatePost(c echo.Context) error {
 	var post models.Post
 
-	if err := c.Bind(&post); err = nil {
-		return c.JSON(http.StatusBadRequest, "Bad Request")
+	if err := c.Bind(&post); err != nil {
+		return c.JSON(http.StatusInternalServerError, nil)
 	}
 
-	con.DB.Save(&post)
+	if result := con.DB.Save(&post); result.Error != nil {
+		return c.JSON(http.StatusInternalServerError, "Couldn't update post")
+	}
 	return c.JSON(http.StatusOK, post)
 }
