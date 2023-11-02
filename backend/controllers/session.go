@@ -66,7 +66,7 @@ func (sh *SessionController) CurrentUser(c echo.Context) (*models.User, error) {
 	}
 
 	var user models.User
-	result := sh.DB.First(&user, userID)
+	result := sh.DB.Take(&user, userID)
 	if result.Error != nil {
 		return nil, result.Error
 	}
