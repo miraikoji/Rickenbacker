@@ -34,7 +34,7 @@
 		</div>
 		<div class="hidden lg:flex">
 			<a href="#" class="text-sm font-semibold leading-6 text-gray-900"
-				>公式サイト <span aria-hidden="true">&rarr;</span></a
+				>ミライ工事 公式サイト <span aria-hidden="true">&rarr;</span></a
 			>
 		</div>
 	</nav>
