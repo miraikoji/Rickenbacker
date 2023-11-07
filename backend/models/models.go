@@ -30,5 +30,5 @@ type Post struct {
 	BaseModel
 	Title  string `form:"title"`
 	Body   string `form:"body"`
-	UserID uint   `form:"user_id"`
+	UserID uint
 }

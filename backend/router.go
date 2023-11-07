@@ -2,7 +2,7 @@ package main
 
 import (
 	"net/http"
-	contollers "rickenbacker/controllers"
+	"rickenbacker/controllers"
 
 	"github.com/labstack/echo-contrib/session"
 	"github.com/labstack/echo/v4"
@@ -14,17 +14,17 @@ func Router(e *echo.Echo, db *gorm.DB) {
 		return c.String(http.StatusOK, "Rickenbacker!!")
 	})
 
-	sessionController := &contollers.SessionController{DB: db}
+	sessionController := &controllers.SessionController{DB: db}
 	e.POST("/login", sessionController.LoginHandler)
 	e.GET("/secret_page", sessionController.SecretsPageHandler, checkLoginMiddleware)
 
-	postController := &contollers.PostsController{DB: db}
+	postController := &controllers.PostsController{DB: db}
 	e.GET("/posts", postController.GetAllPosts)
 	e.GET("/posts/:id", postController.GetPost)
-	e.POST("/posts", postController.CreatePost)
-	e.PATCH("/posts/:id", postController.UpdatePost)
+	e.POST("/posts", postController.CreatePost, checkLoginMiddleware)
+	e.PATCH("/posts/:id", postController.UpdatePost, checkLoginMiddleware)
 
-	// userController := &contollers.UserController{DB: db}
+	// userController := &controllers.UserController{DB: db}
 }
 
 func checkLoginMiddleware(next echo.HandlerFunc) echo.HandlerFunc {

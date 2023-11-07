@@ -1,0 +1,5 @@
+PATCH http://localhost:9090/posts/17
+Cookie: session=MTY5NzY5NDk2OXxEdi1CQkFFQ180SUFBUkFCRUFBQVBQLUNBQUlHYzNSeWFXNW5EQXNBQ1d4dloyZGxaRjlwYmdSaWIyOXNBZ0lBQVFaemRISnBibWNNQ1FBSGRYTmxjbDlwWkFSMWFXNTBCZ0lBQVE9PXzxijywG6OQF3SXLrcEISLP74P4Cp0tnAFKYB8-zPyigQ==
+Content-Type: application/x-www-form-urlencoded
+
+title=テストぽすと&body=記事ないよう

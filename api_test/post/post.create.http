@@ -1,0 +1,5 @@
+POST http://localhost:9090/posts
+Cookie: session=MTY5NzY5NDk2OXxEdi1CQkFFQ180SUFBUkFCRUFBQVBQLUNBQUlHYzNSeWFXNW5EQXNBQ1d4dloyZGxaRjlwYmdSaWIyOXNBZ0lBQVFaemRISnBibWNNQ1FBSGRYTmxjbDlwWkFSMWFXNTBCZ0lBQVE9PXzxijywG6OQF3SXLrcEISLP74P4Cp0tnAFKYB8-zPyigQ==
+Content-Type: application/x-www-form-urlencoded
+
+title=テストポスト&body=記事内容

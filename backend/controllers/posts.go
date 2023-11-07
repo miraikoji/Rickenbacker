@@ -39,6 +39,13 @@ func (con *PostsController) CreatePost(c echo.Context) error {
 		return c.JSON(http.StatusInternalServerError, nil)
 	}
 
+	sh := SessionController{DB: con.DB}
+	user, err := sh.CurrentUser(c)
+	if err != nil {
+		return c.JSON(http.StatusNotFound, "User Not Found")
+	}
+	post.UserID = user.ID
+
 	if result := con.DB.Create(&post); result.Error != nil {
 		return c.JSON(http.StatusInternalServerError, "Couldn't create post")
 	}
@@ -51,6 +58,13 @@ func (con *PostsController) UpdatePost(c echo.Context) error {
 	if err := c.Bind(&post); err != nil {
 		return c.JSON(http.StatusInternalServerError, nil)
 	}
+
+	sh := SessionController{DB: con.DB}
+	user, err := sh.CurrentUser(c)
+	if err != nil {
+		return c.JSON(http.StatusNotFound, "User Not Found")
+	}
+	post.UserID = user.ID
 
 	if result := con.DB.Save(&post); result.Error != nil {
 		return c.JSON(http.StatusInternalServerError, "Couldn't update post")
