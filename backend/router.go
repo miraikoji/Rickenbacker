@@ -50,7 +50,7 @@ func UserAuthenticator(next echo.HandlerFunc) echo.HandlerFunc {
 	return func(c echo.Context) error {
 		sess, _ := session.Get("session", c)
 		if loggedIn, ok := sess.Values["logged_in"].(bool); !ok || !loggedIn {
-			return c.Redirect(http.StatusSeeOther, "/login")
+			return c.String(http.StatusUnauthorized, "Unauthorized")
 		}
 
 		return next(c)
