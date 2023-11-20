@@ -12,7 +12,7 @@ func Seed(db *gorm.DB) {
 	seedUser := User{
 		Email:    "mirai@example.com",
 		Password: hashed("password"),
-		Name:     "sample",
+		Name:     "Taro Mirai",
 	}
 	db.FirstOrCreate(&seedUser)
 	log.Println("[Seed] Create User:", seedUser.Email)

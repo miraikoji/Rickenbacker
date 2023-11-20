@@ -40,6 +40,25 @@
 					<Badge name="RSpec" />
 				</div>
 			</div>
+			<div>
+				<div class="isolate flex -space-x-2 overflow-hidden">
+					<img
+						class="relative z-30 inline-block h-8 w-8 rounded-full ring-2 ring-white"
+						src="https://avatars.githubusercontent.com/u/60030224?v=4"
+						alt=""
+					/>
+					<img
+						class="relative z-20 inline-block h-8 w-8 rounded-full ring-2 ring-white"
+						src="https://avatars.githubusercontent.com/u/6788936?v=4"
+						alt=""
+					/>
+					<img
+						class="relative z-10 inline-block h-8 w-8 rounded-full ring-2 ring-white"
+						src="https://avatars.githubusercontent.com/u/36214433?v=4"
+						alt=""
+					/>
+				</div>
+			</div>
 		</aside>
 	</div>
 </div>
