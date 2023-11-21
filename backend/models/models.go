@@ -12,7 +12,7 @@ func Migrate(db *gorm.DB) {
 }
 
 type BaseModel struct {
-	ID        uint      `param:"id"`
+	ID        uint      `gorm:"primaryKey"`
 	CreatedAt time.Time `gorm:"<-:create"`
 	UpdatedAt time.Time
 	DeletedAt gorm.DeletedAt

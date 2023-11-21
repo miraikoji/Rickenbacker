@@ -51,12 +51,13 @@ func (con *PostsController) CreatePost(c echo.Context) error {
 func (con *PostsController) UpdatePost(c echo.Context) error {
 	var post models.Post
 
+	if result := con.DB.Take(&post, c.Param("id")); result.Error != nil {
+		return c.JSON(http.StatusNotFound, "Post Not Found")
+	}
+
 	if err := c.Bind(&post); err != nil {
 		return c.JSON(http.StatusInternalServerError, nil)
 	}
-
-	user := c.Get("CurrentUser").(*models.User)
-	post.UserID = user.ID
 
 	if result := con.DB.Save(&post); result.Error != nil {
 		return c.JSON(http.StatusInternalServerError, "Couldn't update post")
