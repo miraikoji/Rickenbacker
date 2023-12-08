@@ -12,6 +12,7 @@ import (
 	"github.com/labstack/echo/v4"
 	"github.com/labstack/echo/v4/middleware"
 	"github.com/labstack/gommon/log"
+	"golang.org/x/crypto/acme/autocert"
 	"gorm.io/driver/mysql"
 	"gorm.io/gorm"
 )
@@ -23,7 +24,7 @@ func main() {
 	var err error
 
 	for i := 0; i < maxRetry; i++ {
-		dsn := "iamapen:password@tcp(db:3306)/rickenbacker?charset=utf8mb4&parseTime=True&loc=Local"
+		dsn := os.Getenv("DATABASE_DSN")
 		db, err = gorm.Open(mysql.Open(dsn), &gorm.Config{})
 
 		if err == nil {
@@ -36,11 +37,13 @@ func main() {
 	}
 
 	models.Migrate(db)
-	if os.Getenv("SEED_DATA") == "true" {
+	if os.Getenv("ECHO_ENV") == "development" {
 		models.Seed(db)
 	}
 
 	e := echo.New()
+	e.AutoTLSManager.HostPolicy = autocert.HostWhitelist("api.miraikoji.dev")
+	e.AutoTLSManager.Cache = autocert.DirCache("/var/www/.cache")
 	e.Logger.SetLevel(log.DEBUG)
 
 	store := sessions.NewCookieStore([]byte("secret-key"))
@@ -61,5 +64,12 @@ func main() {
 
 	Router(e, db)
 
-	e.Logger.Fatal(e.Start(":9090"))
+	var port string
+	if os.Getenv("ECHO_ENV") == "development" {
+		port = ":9090"
+		e.Logger.Fatal(e.Start(port))
+	} else {
+		port = ":443"
+		e.Logger.Fatal(e.StartAutoTLS(port))
+	}
 }
