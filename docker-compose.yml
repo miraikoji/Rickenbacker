@@ -28,7 +28,8 @@ services:
     stdin_open: true
     environment:
       TZ: 'Asia/Tokyo'
-      SEED_DATA: true
+      ECHO_ENV: development
+      DATABASE_DSN: 'iamapen:password@tcp(db:3306)/rickenbacker?charset=utf8mb4&parseTime=True&loc=Local'
     volumes:
       - ./backend:/app
 
