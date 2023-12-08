@@ -45,6 +45,7 @@ func (con *PostsController) CreatePost(c echo.Context) error {
 	if result := con.DB.Create(&post); result.Error != nil {
 		return c.JSON(http.StatusInternalServerError, "Couldn't create post")
 	}
+
 	return c.JSON(http.StatusCreated, post)
 }
 

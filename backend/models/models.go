@@ -20,9 +20,9 @@ type BaseModel struct {
 
 type User struct {
 	BaseModel
-	Email    string
-	Password string
-	Name     string
+	Email    string `form:"email"`
+	Password string `form:"password"`
+	Name     string `form:"name"`
 	Posts    []Post
 }
 
