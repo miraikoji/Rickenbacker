@@ -9,6 +9,7 @@ import (
 func Migrate(db *gorm.DB) {
 	db.AutoMigrate(&User{})
 	db.AutoMigrate(&Post{})
+	db.AutoMigrate(&Category{})
 }
 
 type BaseModel struct {
@@ -28,7 +29,14 @@ type User struct {
 
 type Post struct {
 	BaseModel
-	Title  string `form:"title"`
-	Body   string `form:"body"`
-	UserID uint
+	Title      string `form:"title"`
+	Body       string `form:"body"`
+	UserID     uint
+	CategoryID uint
+}
+
+type Category struct {
+	BaseModel
+	Title string `form:"title"`
+	Posts []Post
 }
