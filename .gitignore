@@ -1,3 +1,4 @@
 .DS_Store
 /backend/tmp
 !/backend/tmp/.gitkeep
+node_modules
