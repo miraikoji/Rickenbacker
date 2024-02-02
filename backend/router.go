@@ -35,6 +35,7 @@ func Router(e *echo.Echo, db *gorm.DB) {
 	e.GET("/categories", categoryController.GetAllCategories)
 	e.POST("/categories", categoryController.CreateCategory, UserAuthenticator)
 	e.PATCH("/categories/:id", categoryController.UpdateCategory, UserAuthenticator)
+	e.GET("/categories/:id/posts", categoryController.GetCategoryPosts)
 
 	// userController := &controllers.UserController{DB: db}
 }

@@ -32,7 +32,7 @@ type Post struct {
 	Title      string `form:"title"`
 	Body       string `form:"body"`
 	UserID     uint
-	CategoryID uint
+	CategoryID uint `form:"category_id"`
 }
 
 type Category struct {

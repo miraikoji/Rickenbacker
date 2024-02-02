@@ -52,3 +52,13 @@ func (con *CategoryController) UpdateCategory(c echo.Context) error {
 	}
 	return c.JSON(http.StatusOK, category)
 }
+
+func (con *CategoryController) GetCategoryPosts(c echo.Context) error {
+	var posts []models.Post
+
+	if result := con.DB.Where("category_id = ?", c.Param("id")).Find(&posts); result.Error != nil {
+		return c.JSON(http.StatusInternalServerError, "Something went wrong")
+	}
+
+	return c.JSON(http.StatusOK, posts)
+}
