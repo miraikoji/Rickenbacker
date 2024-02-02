@@ -1,3 +1,9 @@
+<script lang="ts">
+	export let categoryName: string;
+	export let categoryPath: string;
+	export let currentPageName: string;
+</script>
+
 <nav class="flex" aria-label="Breadcrumb">
 	<ol role="list" class="flex items-center space-x-4">
 		<li>
@@ -33,7 +39,9 @@
 						clip-rule="evenodd"
 					/>
 				</svg>
-				<a href="#" class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700">Posts</a>
+				<a href={categoryPath} class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
+					>{categoryName}</a
+				>
 			</div>
 		</li>
 		<li>
@@ -53,9 +61,7 @@
 				<a
 					href="#"
 					class="ml-4 text-sm font-medium text-gray-500 hover:text-gray-700"
-					aria-current="page"
-					>CIの料金を気にせずじゃぶじゃぶ使いたいので、GitHub ActionsのSelf
-					hosted-runnerをFargateSpot+Terraform+ECSで動かした</a
+					aria-current="page">{currentPageName}</a
 				>
 			</div>
 		</li>
