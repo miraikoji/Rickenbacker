@@ -17,4 +17,10 @@ declare type Post = {
 	Title: string;
 	Body: string;
 	UserID: number;
+	ImageURL: string | null;
+};
+
+declare type Breadcrumb = {
+	Name: string;
+	Path: string;
 };
