@@ -15,8 +15,6 @@ export const load = async ({ params, fetch }): Promise<{ post: Post }> => {
 	};
 
 	if (!isNaN(Number(params.id))) {
-		console.log('hello world');
-
 		const response = await fetchPost(`http://localhost:9090/posts/${params.id}`);
 
 		if (response !== null) {

@@ -2,6 +2,7 @@
 	import '../app.css';
 	import Header from '@/components/Header.svelte';
 	import SideHeader from '@/components/SideHeader.svelte';
+	import SideCategories from '@/components/SideCategories.svelte';
 	import Badge from '@/components/Badge.svelte';
 </script>
 
@@ -15,10 +16,7 @@
 		<aside class="col-span-3 my-24">
 			<div class="mb-6">
 				<SideHeader title="カテゴリー" />
-				<ul role="list" class="marker:text-red-500 list-disc pl-5 my-2 space-y-1 text-slate-600">
-					<li>エンジニアブログ</li>
-					<li>ポッドキャスト</li>
-				</ul>
+				<SideCategories />
 			</div>
 			<div class="mb-6">
 				<SideHeader title="タグ" />

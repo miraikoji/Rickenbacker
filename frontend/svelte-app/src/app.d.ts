@@ -20,6 +20,11 @@ declare type Post = {
 	ImageURL: string | null;
 };
 
+declare type Category = {
+	ID: number;
+	Title: string;
+};
+
 declare type Breadcrumb = {
 	Name: string;
 	Path: string;
